@@ -98,31 +98,11 @@ body {
 
 
 .card-logo.star.active {
-  /* background-position: 0 0; */
   opacity: 1;
   z-index: 10;
   width: 30px;
 }
-/* 
-.card-logo.mastercard {
-  background-position: 0 0;
-}
 
-.card-logo.visa {
-  background-position: -119px 0;
-}
-
-.card-logo.mastercard.active {
-  background-position: 0 -21px;
-  opacity: 1;
-  filter: none;
-}
-
-.card-logo.visa.active {
-  background-position: -119px -21px;
-  opacity: 1;
-  filter: none;
-} */
 
 .side-buttons {
   position: absolute;

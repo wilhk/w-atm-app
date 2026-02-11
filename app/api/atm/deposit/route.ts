@@ -8,7 +8,6 @@ export async function POST(request: NextRequest) {
 
   const token = request.cookies.get(getSessionCookieName())?.value;
   const amount = typeof body?.amount === "number" ? body.amount : NaN;
-  console.log(`Received deposit request for amount: ${amount} with token: ${token}`);
   const result = deposit(token, amount);
 
   if (!result.ok) {
