@@ -1,26 +1,318 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background:  #9a7caf;
   --foreground: #171717;
+  --machine: #d6d5ce;
+  --screen: #75a6c8;
+  --screen-border: #b8c2c6;
+  --line: #d9ecfb;
+  --text: #eff7ff;
+  --text-dark: #2d3b47;
+  --button: #b9b9b9;
+  --button-shadow: #9f9f9f;
+  --error: #ffeff0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (max-width: 480px) {
+  .atm-machine {
+    width: min(98vw, 360px);
+  }
+
+  .atm-body {
+    min-height: 640px;
+  }
+
+  .side-button {
+    width: 30px;
+    height: 18px;
   }
 }
 
 body {
+   font-family: "Lucida Console", "Andale Mono", "Courier New", monospace;
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text-dark);
+}
+
+
+
+.atm-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 12px;
+}
+
+.atm-machine {
+  width: min(92vw, 380px);
+}
+
+.atm-body {
+  width: 80%;
+  top: -60px;
+  min-height: 680px;
+  background: var(--machine);
+  margin: 0 auto;
+  position: relative;
+  padding-top: 14px;
+}
+
+.atm-sign {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+  position: relative;
+  z-index: 2;
+}
+
+.card-strip {
+  width: 238px;
+  height: 21px;
+  margin: 0 auto 8px;
+  /* display: flex; */
+  position: relative;
+  overflow: hidden;
+}
+.card-logo {
+  width: 250px;
+  height: 21px;
+  background-image: url("/assets/creditcard_sprite.png");
+  background-repeat: no-repeat;
+  background-size: 237px 42px;
+  opacity: 0.27;
+  filter: saturate(0.55);
+  position: absolute;
+  top: 0;
+  left: 0;  
+}
+
+
+.card-logo.logged-in {
+  opacity: 0.38;
+}
+
+
+.card-logo.star.active {
+  /* background-position: 0 0; */
+  opacity: 1;
+  z-index: 10;
+  width: 30px;
+}
+/* 
+.card-logo.mastercard {
+  background-position: 0 0;
+}
+
+.card-logo.visa {
+  background-position: -119px 0;
+}
+
+.card-logo.mastercard.active {
+  background-position: 0 -21px;
+  opacity: 1;
+  filter: none;
+}
+
+.card-logo.visa.active {
+  background-position: -119px -21px;
+  opacity: 1;
+  filter: none;
+} */
+
+.side-buttons {
+  position: absolute;
+  top: 128px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.side-buttons.left {
+  left: -24px;
+}
+
+.side-buttons.right {
+  right: -24px;
+}
+
+.side-button {
+  width: 36px;
+  height: 20px;
+  border: 1px solid #a4a4a4;
+  background: linear-gradient(180deg, #bdbdbd 0%, var(--button) 68%, var(--button-shadow) 100%);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.side-button:disabled {
+  cursor: default;
+}
+
+.atm-screen-shell {
+  width: 228px;
+  margin: 0 auto;
+  border: 5px solid var(--screen-border);
+  background: var(--screen);
+}
+
+.atm-screen {
+  position: relative;
+  min-height: 250px;
+  background: var(--screen);
+  color: var(--text);
+  padding: 14px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+}
+
+.screen-state {
+  min-height: 215px;
+}
+
+.screen-state p {
+  margin: 0;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.14);
+}
+
+.screen-pin p:first-child,
+.screen-menu p:first-child,
+.screen-balance p:first-child,
+.screen-action p:first-child {
+  text-align: center;
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.screen-sub {
+  margin-top: 6px !important;
+  font-size: 11px;
+  text-align: center;
+}
+.screen-error {
+  background: var(--error);
+  color: var(--text-dark);
+  padding: 8px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 11px;
+}
+
+
+.screen-link {
+  position: absolute;
+  width: 46%;
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+}
+
+.screen-link.left {
+  left: 0;
+  justify-content: flex-start;
+}
+
+.screen-link.right {
+  right: 0;
+  justify-content: flex-end;
+}
+
+.screen-link.left::before,
+.screen-link.right::after {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--line);
+}
+
+.screen-link.left::before {
+  margin-right: 6px;
+}
+
+.screen-link.right::after {
+  margin-left: 6px;
+}
+
+.row-1 {
+  top: 118px;
+}
+
+.row-2 {
+  top: 150px;
+}
+
+.row-3 {
+  top: 180px;
+}
+
+.row-4 {
+  top: 202px;
+}
+
+.sticker {
+  position: absolute;
+  width: 78px;
+  height: auto;
+  left: 20px;
+  top: 300px;
+  transform: rotate(-28deg);
+}
+
+.graffiti {
+  position: relative;
+  width: 200px;
+  height: auto;
+  margin-left: 200px;
+  top: -120px;
+  z-index: 3;
+}
+
+.systems-logo {
+  position: relative;
+  width: 54px;
+  height: auto;
+  top: 8px;
+  left: 200px;
+  opacity: 0.72;
+}
+
+.pin-input-row,
+.amount-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  gap: 6px;
+  color: var(--text);
+}
+
+.pin-input-row span,
+.amount-row span {
+  font-size: 11px;
+}
+
+.pin-input-row input,
+.amount-row input {
+  width: 120px;
+  border: 1px solid #d9edf8;
+  background: rgba(230, 244, 252, 0.9);
+  color: #244258;
+  font-family: inherit;
+  font-size: 12px;
+  padding: 4px 6px;
+  outline: none;
+}
+
+
+.money {
+  margin-top: 5px !important;
+  text-align: center;
+  font-size: 20px;
 }
