@@ -1,3 +1,8 @@
+## ATM App Demo 
+
+This is an ATM-liked demo web app built with next.js and react with mocking service. Features included UI updates according to state changes, fetching data from backend through API (mock), session & state management (browser cookies and demo sessions). 
+
+
 ## Installation and run
 1. Ensure Node.js 18.17+ (or Node 20+) is installed.
 2. Install dependencies:
